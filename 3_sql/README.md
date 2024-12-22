@@ -3,7 +3,6 @@ I faced some query limitations ON the https://www.w3schools.com/sql/trysql.asp?f
 that's why I'd ask to execute all the commands ON another similar platform without such query limitations: https://www.db-fiddle.com/
 ```
 
-
 ## Insert these commands into `Schema SQL` tab ON the https://www.db-fiddle.com/
 
 CREATE TABLE `user` (id INT PRIMARY KEY, firstName VARCHAR(255), lastName VARCHAR(255), email VARCHAR(255),  cultureID INT, deleted bit(1), country VARCHAR(255), isRevokeAccess bit(1), created DATETIME);
@@ -56,9 +55,9 @@ FROM `user` u
 LEFT JOIN `groupMembership` gm ON u.id = gm.userID
 LEFT JOIN `group` g ON gm.groupID = g.id
 WHERE u.firstName = 'Victor'
-AND (g.name NOT LIKE 'TEST%' or g.name IS NULL);
+AND (g.name NOT LIKE 'TEST%' OR g.name IS NULL);
 
-SELECT g.name as groupName, u.firstName FROM `user` u
+SELECT g.name as groupName, u.firstName, u.lastName FROM `user` u
 join `groupMembership` gm
 ON gm.userID = u.id
 join `group` g 

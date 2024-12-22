@@ -5,7 +5,7 @@
 2. run `npm i` (or `npm install`)
 3. place file credentials.json in the root of the project, 
 - run `touch credentials.json` 
-- fill it up with credentials, provided to use with the project (ask the developer for them)
+- fill it up with credentials, provided to use with the project (ask the developer for them) or insert the prefilled credentials.json
 
 Eventually it should look like that
 
@@ -23,6 +23,7 @@ Eventually it should look like that
   "universe_domain": "googleapis.com"
 }
 
-4. Fill `PUBLIC_CALENDAR_ID` on `index.js` with public google calendar which you want to get intervals from
-5. Fill `START_TIME` and `END_TIME` respectively
-6. run `node .` and check results in terminal
+4. run `node .` and check the test results in terminal (take a look at TestCalendarScreenshot.png to compare the result)
+5. Fill `PUBLIC_CALENDAR_ID` on `index.js` with public google calendar which you want to get intervals from
+6. Fill `START_TIME` and `END_TIME` respectively
+

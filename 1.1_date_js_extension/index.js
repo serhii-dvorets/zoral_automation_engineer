@@ -3,7 +3,7 @@ Date.prototype.daysTo = function(date) {
     let inputDate = date
 
     if (['string', 'number'].includes(typeof date)) {
-        inputDate = new Date(date + 'T00:00:00Z');
+        inputDate = new Date(date);
     } else if (date instanceof Date) {
         inputDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
     }

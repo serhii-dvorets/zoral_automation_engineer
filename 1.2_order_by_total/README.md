@@ -1,0 +1,1 @@
+run `node 1.2_order_by_total` to log results

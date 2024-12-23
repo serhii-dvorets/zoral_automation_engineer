@@ -145,5 +145,3 @@ testCases.forEach(({testId, src, proto, expected}) => {
         positiveResult: JSON.stringify(projectedObj) === JSON.stringify(expected)
     });
 })
-
-// to log testing results run node 1.3_object_projection

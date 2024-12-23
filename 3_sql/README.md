@@ -41,7 +41,7 @@ INSERT INTO `groupMembership` (id, userID, groupID, created) VALUES
 
 ```
 I decided to use `TEST%` substring instead of `TEST-%` to use with `LIKE` operator in order to include the 'TEST - dev team' to the results.
-This group name looks LIKE quite a good candidate to be included in the group of other TEST groups (in real life, I'd ask the client or a manager about the clarifications, but now, for the sake of simplicity, I made the choice)
+This group name looks LIKE quite a good candidate to be included in the group of other TEST groups (in real life, I'd ask the client or a manager about the clarifications, but now, for the sake of simplicity, I made the choice for myself)
 ```
 
 SELECT name FROM `group` g

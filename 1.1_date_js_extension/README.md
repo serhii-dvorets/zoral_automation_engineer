@@ -1,0 +1,1 @@
+run `node 1.1_node date_js_extension` to log results

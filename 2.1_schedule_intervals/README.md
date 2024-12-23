@@ -3,7 +3,9 @@
 ## Configure and run app
 1. Switch to the project root folder, run `cd 2.1_schedule_intervals`
 2. run `npm i` (or `npm install`)
-3. place file credentials.json in the root of the project, 
+3. place file credentials.json in the root of the project,
+- paste the prefilled `credentials.json` file into the root
+or create the empty one and fill it up
 - run `touch credentials.json` 
 - fill it up with credentials, provided to use with the project (ask the developer for them) or insert the prefilled credentials.json
 

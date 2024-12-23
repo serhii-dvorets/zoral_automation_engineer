@@ -46,5 +46,3 @@ Object.entries(testCases).forEach(([key, values]) => {
         console.log({key, date1, date2, result});
     })
 })
-
-// to log testing results run `1.1_node date_js_extension`

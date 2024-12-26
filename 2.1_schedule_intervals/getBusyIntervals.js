@@ -49,7 +49,7 @@ function getEventsIntervals(events) {
     }
 
     const lastPushedEvent = intervals[intervals.length - 1]
-
+    
     const isGapBetweenEvents = hasGap(start.dateTime, lastPushedEvent.endDate)
 
     if (isGapBetweenEvents) {
@@ -73,7 +73,6 @@ async function listEvents(calendarId, timeMin, timeMax) {
     calendarId,
     timeMin,
     timeMax,
-    maxResults: 10,
     singleEvents: true,
     orderBy: 'startTime',
   });
@@ -84,7 +83,7 @@ async function listEvents(calendarId, timeMin, timeMax) {
 function hasGap(date1, date2) {
   const difference = new Date(date1).getTime() - new Date(date2).getTime()
 
-  return difference ? true : false
+  return difference > 0 ? true : false
 }
 
 module.exports = {getBusyIntervals}

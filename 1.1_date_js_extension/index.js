@@ -5,7 +5,7 @@ Date.prototype.daysTo = function(date) {
     if (['string', 'number'].includes(typeof date)) {
         inputDate = new Date(date);
     } else if (date instanceof Date) {
-        inputDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+        inputDate = new Date(date);
     }
 
     if (!(inputDate instanceof Date) || isNaN(inputDate.getTime())) {
@@ -13,8 +13,8 @@ Date.prototype.daysTo = function(date) {
     }
         
     const diff = inputDate.getTime() - this.getTime()
-
-    return Math.floor(Math.abs(diff) / dayInMs)   
+    
+    return diff < 0 ? Math.ceil(diff / dayInMs) : Math.floor(diff / dayInMs)   
 }
 
 const testCases = {

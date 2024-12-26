@@ -1,9 +1,10 @@
-function orderByTotal(orders) {
+function orderByTotal(orders, order) {
+    const asc = order === 'asc'
     if (!Array.isArray(orders) || !orders?.length) return []
 
     return orders.map(({amount, quantity}) => ({
         amount, quantity, Total: amount * quantity
-    })).sort((a, b) => a.Total - b.Total)
+    })).sort((a, b) => asc ? a.Total - b.Total : b.Total - a.Total)
 }
 
 const ordersForTest = [
@@ -14,8 +15,6 @@ const ordersForTest = [
     {amount: 55, quantity: 1},
 ]
 
-const sortedOrders = orderByTotal(ordersForTest);
+const sortedOrders = orderByTotal(ordersForTest, 'desc');
 
 console.log({input: ordersForTest, output: sortedOrders});
-
-// to log testing result run node 1.2_order_by_total

@@ -7,7 +7,14 @@ function objectProjection(sourceObj, prototypeObj) {
 
     for (const key in prototypeObj) {
         if (key in sourceObj) {
-            if (Array.isArray(sourceObj[key])) {
+            if (
+                typeof prototypeObj[key] === 'object'
+                && prototypeObj[key] !== null
+                && Object?.keys(prototypeObj[key])?.length
+                && (typeof sourceObj[key] !== 'object' || sourceObj[key] === null)
+            ) {
+                continue;
+            } else if (Array.isArray(sourceObj[key])) {
                 
                 result[key] = sourceObj[key];
 
@@ -130,18 +137,12 @@ const testCases = [
     // },
     // {
     //     testId: 9,
-    //     src: { a: 1, b: { x: 10 } },
-    //     proto: { a: { x: true } }, 
-    //     expected: { a: 1 }
-    // },
-    // {
-    //     testId: 10,
     //     src: { a: [1, 2, 3], b: 2 },
     //     proto: { a: [true] }, 
     //     expected: { a: [1, 2, 3] }
     // },
     {
-        testId: 11,
+        testId: 10,
         src: {
             prop22: null,           //prop22
             prop33: {
@@ -168,7 +169,6 @@ const testCases = [
         },
         expected: {
             prop11: {
-                prop111: "value",
                 prop112: {
                     prop112: null   //prop11.prop112.prop112
                 }

@@ -12,78 +12,33 @@ const auth = new JWT({
 const calendar = google.calendar({ version: 'v3', auth });
 
 async function getBusyIntervals(calendarId, timeMin, timeMax) {
-  const events = await listEvents(calendarId, timeMin, timeMax)
-  if (!events.length) {
-    console.log('No upcoming events found.');
-    return
+  try {
+    const response = await calendar.freebusy.query({
+      requestBody: {
+        timeMin,
+        timeMax,
+        items: [{ id: calendarId }],
+      },
+    });
+
+    const busyIntervals = response.data.calendars[calendarId].busy;
+
+    if (!busyIntervals.length) {
+      console.log('No busy intervals found.');
+      return;
+    }
+
+    console.log(
+      `Busy intervals\n\n    from ${timeMin}\n    to ${timeMax}: `, busyIntervals.map(({start, end}) => ({
+        start: new Date(start).toLocaleString(),
+        end: new Date(end).toLocaleString()
+      }))
+    );
+
+    return busyIntervals;
+  } catch (error) {
+    console.error('Error fetching busy intervals:', error);
   }
-
-  const busyIntervals = getEventsIntervals(events)
-
-  console.log(
-    `Busy intervals
-  
-    from ${timeMin}
-    to ${timeMax}: `, busyIntervals
-  );
 }
 
-function getEventsIntervals(events) {
-  const intervals = []
-
-  events.forEach((event) => {
-    const interval = {
-      startDate: '',
-      endDate: '',
-    }
-
-    const {start, end} = event;
-
-    if (!intervals.length) {
-
-      interval.startDate = start.dateTime
-      interval.endDate = end.dateTime
-      intervals.push(interval)
-
-      return 
-    }
-
-    const lastPushedEvent = intervals[intervals.length - 1]
-    
-    const isGapBetweenEvents = hasGap(start.dateTime, lastPushedEvent.endDate)
-
-    if (isGapBetweenEvents) {
-      interval.startDate = start.dateTime
-      interval.endDate = end.dateTime
-      intervals.push(interval)
-    } else {
-      intervals.splice(-1, 1, {
-        startDate: lastPushedEvent.startDate,
-        endDate: end.dateTime
-      })
-    }
-
-  });
-
-  return intervals;
-}
-
-async function listEvents(calendarId, timeMin, timeMax) {
-  const response = await calendar.events.list({
-    calendarId,
-    timeMin,
-    timeMax,
-    singleEvents: true,
-    orderBy: 'startTime',
-  });
-
-  return response.data.items;
-}
-
-function hasGap(date1, date2) {
-  const difference = new Date(date1).getTime() - new Date(date2).getTime()
-
-  return difference > 0 ? true : false
-}
-
-module.exports = {getBusyIntervals}
+module.exports = { getBusyIntervals };
